@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 # Create your models here.
 
@@ -7,12 +7,12 @@ class Sender(models.Model):
     email           =   models.EmailField()
     clave           =   models.CharField(max_length=20)
     servidor_smtp   =   models.CharField(max_length=30)
-    puerto_smtp     =   models.IntegerField();
-    user            =   models.ForeignKey(User,         on_delete=models.CASCADE)
+    puerto_smtp     =   models.IntegerField()
     
 class Receiver(models.Model):
     email           =   models.EmailField();
     descripcion     =   models.CharField(max_length=256)
+    group           =   models.ForeignKey(Group,        on_delete=models.CASCADE)
     
 class Reminder(models.Model):
     sender          =   models.ForeignKey(Sender,       on_delete=models.CASCADE)
